@@ -126,7 +126,11 @@ class HBNBCommand(cmd.Cmd):
         new_instance = globals()[arguments[0]]()
         for my_args in f_arguments:
             key, value = my_args.split("=")
-            setattr(new_instance, key, value)
+            if '_' in value:
+                new_value = value.replace('_', ' ')
+                setattr(new_instance, key, new_value)
+            else:
+                setattr(new_instance, key, value)
         storage.save()
         print(new_instance.id)
 
