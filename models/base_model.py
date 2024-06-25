@@ -3,6 +3,11 @@
 import uuid
 from datetime import datetime
 from models import storage
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import Column, Integer, String
+
+
+Base = declarative_base()
 
 
 class BaseModel:
@@ -10,17 +15,20 @@ class BaseModel:
     def __init__(self, *args, **kwargs):
         """Instatntiates a new model"""
         if not kwargs:
-            self.id = str(uuid.uuid4())
-            self.created_at = datetime.now()
-            self.updated_at = datetime.now()
-            storage.new(self)
+            self.id = Column(String(60), nullable=False, primary_key=True)
+            self.created_at = Column(datetime, nullable=False,
+                                     default=datetime.utcnow())
+            self.updated_at = Column(datetime, nullable=False,
+                                     default=datetime.utcnow())
         else:
             kwargs['updated_at'] = datetime.strptime(kwargs['updated_at'],
                                                      '%Y-%m-%dT%H:%M:%S.%f')
             kwargs['created_at'] = datetime.strptime(kwargs['created_at'],
                                                      '%Y-%m-%dT%H:%M:%S.%f')
             del kwargs['__class__']
-            self.__dict__.update(kwargs)
+            for key, value in kwargs.items():
+                self.key = value
+            # self.__dict__.update(kwargs)
 
     def __str__(self):
         """Returns a string representation of the instance"""
@@ -31,6 +39,7 @@ class BaseModel:
         """Updates updated_at with current time when instance is changed"""
         from models import storage
         self.updated_at = datetime.now()
+        storage.new(self)
         storage.save()
 
     def to_dict(self):
@@ -41,4 +50,14 @@ class BaseModel:
                           (str(type(self)).split('.')[-1]).split('\'')[0]})
         dictionary['created_at'] = self.created_at.isoformat()
         dictionary['updated_at'] = self.updated_at.isoformat()
+        key_to_remove = '_sa_instance_state'
+        if key_to_remove in dictionary.keys():
+            del dictionary[key_to_remove]
         return dictionary
+
+    def delete(self):
+        """
+        delete the current instance from the storage
+        (models.storage) by calling the method delete
+        """
+        storage.delete(self)
