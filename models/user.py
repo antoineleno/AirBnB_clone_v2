@@ -19,6 +19,3 @@ class User(BaseModel, Base):
         """ Initializes a new user """
         super().__init__(*args, **kwargs)
 
-    def __str__(self):
-        """ Returns a string representation of the instance """
-        return "[{} ({}) {}]".format(type(self).__name__, self.id, self.to_dict())
