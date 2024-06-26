@@ -17,7 +17,6 @@ class City(BaseModel, Base):
 
     if os.getenv('HBNB_TYPE_STORAGE') == 'db':
         from models.state import State
-        from models.place import Place
         state = relationship("State", back_populates="cities")
-        places = relationship("Place", back_populates="city",
+        places = relationship("Place", back_populates="cities",
                               cascade="all, delete-orphan")

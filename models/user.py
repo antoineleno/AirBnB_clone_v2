@@ -16,11 +16,6 @@ class User(BaseModel, Base):
     last_name = Column(String(128), nullable=True)
 
     if os.getenv('HBNB_TYPE_STORAGE') == 'db':
-        from models.place import Place
         places = relationship("Place", back_populates="user",
                               cascade="all, delete-orphan")
 
-    
-    def __init__(self, *args, **kwargs):
-        """ Initializes a new user """
-        super().__init__(*args, **kwargs)
