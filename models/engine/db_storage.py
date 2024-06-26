@@ -62,7 +62,7 @@ class DBStorage:
         else:
             objs = self.__session.query(cls).all()
             for o in objs:
-                obj_result["{}.{}".format(o.name, o.id)] = o
+                obj_result["{}.{}".format(o.__table__, o.id)] = o
         return obj_result
 
     def new(self, obj):
