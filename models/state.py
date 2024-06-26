@@ -16,6 +16,7 @@ class State(BaseModel, Base):
         cities = relationship("City", back_populates="state",
                               cascade="all, delete-orphan")
     else:
+        from models.city import City
         @property
         def cities(self):
             """
@@ -23,5 +24,5 @@ class State(BaseModel, Base):
             equals to the currentState.id => It will be the
             FileStorage relationship between State and City
             """
-            return [city for city in models.storage.all(models.City).values()
-                    if models.City.state_id == self.id]
+            return [city for city in models.storage.all(City).values()
+                    if City.state_id == self.id]

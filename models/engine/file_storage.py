@@ -21,11 +21,7 @@ class FileStorage:
         from models.review import Review
 
         if cls:
-            new_objects = {}
-            for key, value in FileStorage.__objects.items():
-                class_name = key.split('.')[0]
-                if (eval(class_name) is cls):
-                    new_objects[key] = value
+            new_objects = {key: value for key, value in FileStorage.__objects.items() if type(value) is cls}
             return new_objects
         else:
             return FileStorage.__objects
@@ -67,13 +63,13 @@ class FileStorage:
         except FileNotFoundError:
             pass
 
-        def delete(self, obj=None):
-            """
-            delete obj from __objects if it’s inside - if obj
-            is equal to None, the method should not do anything
-            """
-            if obj is None:
-                return
-            key_to_delete = obj.to_dict()['__class__'] + '.' + obj.id
-            if key_to_delete in FileStorage.__objects.keys():
-                del FileStorage.__objects[key_to_delete]
+    def delete(self, obj=None):
+        """
+        delete obj from __objects if it’s inside - if obj
+        is equal to None, the method should not do anything
+        """
+        if obj is None:
+            return
+        key_to_delete = obj.__class__.__name__ + '.' + obj.id
+        if key_to_delete in self.__class__.__objects.keys():
+            del self.__class__.__objects[key_to_delete]
