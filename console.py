@@ -11,6 +11,7 @@ from models.city import City
 from models.amenity import Amenity
 from models.review import Review
 import shlex
+import os
 
 class HBNBCommand(cmd.Cmd):
     """ Contains the functionality for the HBNB console"""
@@ -131,7 +132,10 @@ class HBNBCommand(cmd.Cmd):
                 setattr(new_instance, key, new_value)
             else:
                 setattr(new_instance, key, value)
-        storage.save()
+        if os.getenv("HBNB_TYPE_STORAGE") == "db":
+            new_instance.save()
+        else:
+            storage.save()
         print(new_instance.id)
 
 
@@ -209,20 +213,28 @@ class HBNBCommand(cmd.Cmd):
     def do_all(self, args):
         """ Shows all objects, or all objects of a class"""
         print_list = []
-
+        all_objs = {}
         if args:
             args = args.split(' ')[0]  # remove possible trailing args
             if args not in HBNBCommand.classes:
                 print("** class doesn't exist **")
                 return
-            for k, v in storage._FileStorage__objects.items():
-                if k.split('.')[0] == args:
-                    print_list.append(str(v))
+            arguments = args.split()
+            if arguments[0]:
+                all_objs = storage.all(arguments[0])
+            else:
+                all_objs = storage.all()
+            for k, v in all_objs.items():
+                print_list.append(str(v))
         else:
-            for k, v in storage._FileStorage__objects.items():
+            all_objs = storage.all()
+            for k, v in all_objs.items():
                 print_list.append(str(v))
 
         print(print_list)
+
+
+
 
     def help_all(self):
         """ Help information for the all command """

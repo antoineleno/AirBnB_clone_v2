@@ -2,8 +2,7 @@
 """ State Module for HBNB project """
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, Integer, String
-from models import storage
-from city import City
+import models
 from sqlalchemy.orm import relationship
 import os
 
@@ -24,5 +23,5 @@ class State(BaseModel, Base):
             equals to the currentState.id => It will be the
             FileStorage relationship between State and City
             """
-            return [city for city in storage.all(City).values()
-                    if City.state_id == self.id]
+            return [city for city in models.storage.all(models.City).values()
+                    if models.City.state_id == self.id]
