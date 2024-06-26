@@ -26,6 +26,3 @@ class State(BaseModel, Base):
             """
             return [city for city in models.storage.all(City).values()
                     if City.state_id == self.id]
-    def __init__(self, *args, **kwargs):
-        """Instatntiates a new model"""
-        super().__init__(*args, **kwargs)
