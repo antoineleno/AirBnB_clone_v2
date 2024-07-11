@@ -31,6 +31,14 @@ def do_pack():
         return None
 
 def do_deploy(archive_path):
+    """do deploy function: Function that take the content in archive and deply it
+
+    Args:
+        archive_path (string): Path of the archive file
+
+    Returns:
+        False if an exception occured
+    """
     if not os.path.exists(archive_path):
         return False
 
