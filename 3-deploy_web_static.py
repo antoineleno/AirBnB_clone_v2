@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" 2-do_deploy_web_static module"""
+""" 3-do_deploy_web_static module"""
 
 from fabric.api import env, run, put
 import os
@@ -8,7 +8,6 @@ from fabric.api import env, local, put, run, runs_once
 
 
 env.hosts = ['528902-web-01', '528902-web-02']
-
 
 @runs_once
 def do_pack():
@@ -31,9 +30,8 @@ def do_pack():
     except Exception as e:
         return None
 
-
 def do_deploy(archive_path):
-    """do deploy function: Function that take the content
+    """do deploy function: Function that take the content in archive and deply it
 
     Args:
         archive_path (string): Path of the archive file
@@ -72,4 +70,13 @@ def do_deploy(archive_path):
 
     except Exception as e:
         print("Deployment failed:", e)
+        return False
+
+def deploy():
+    """Full deployment"""
+
+    archive_path = do_pack();
+    if (archive_path):
+        deploy(archive_path)
+    else:
         return False
