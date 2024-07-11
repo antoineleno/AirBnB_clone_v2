@@ -7,10 +7,11 @@ import os
 
 env.hosts = ['528902-web-01', '528902-web-02']
 
+
 def do_deploy(archive_path):
     if not os.path.exists(archive_path):
         return False
-    
+
     try:
         my_archive = os.path.basename(archive_path)
         put(archive_path, '/tmp/{}'.format(my_archive))
@@ -36,7 +37,7 @@ def do_deploy(archive_path):
 
         print("New version deployed!")
         return True
-    
+
     except Exception as e:
         print("Deployment failed:", e)
         return False
