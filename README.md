@@ -18,6 +18,19 @@ This repository contains the initial stage of a student project to build a clone
 * How to handle 2 different storage engines with the same codebase
 * How to use environment variables
 
+
+[CI/CD] (https://intranet.alxswe.com/concepts/43)
+[AirBnB clone] [(](https://intranet.alxswe.com/concepts/74))
+[How to use Fabric] (https://www.digitalocean.com/community/tutorials/how-to-use-fabric-to-automate-administration-tasks-and-deployments)
+[How to use Fabric in Python] (https://www.pythonforbeginners.com/systems-programming/how-to-use-fabric-in-python)
+[Fabric and command line options] (https://docs.fabfile.org/en/1.13/usage/fab.html)
+[CI/CD concept page] (https://intranet.alxswe.com/concepts/43)
+[Nginx configuration for beginners] (https://nginx.org/en/docs/beginners_guide.html)
+[Difference between root and alias on NGINX] (https://blog.heitorsilva.com/en/nginx/diferenca-entre-root-e-alias-do-nginx/)
+[Fabric for Python 3] (https://github.com/mathiasertl/fabric)
+[Fabric Documentation] (https://www.fabfile.org/)
+
+
 <center><h3>Repository Contents by Project Task</h3> </center>
 
 | Tasks | Files | Description |
