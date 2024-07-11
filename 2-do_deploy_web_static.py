@@ -3,10 +3,32 @@
 
 from fabric.api import env, run, put
 import os
+from datetime import datetime
+from fabric.api import env, local, put, run, runs_once
 
 
 env.hosts = ['xx-web-01', 'xx-web-02']
 
+@runs_once
+def do_pack():
+    """
+    Generates a .tgz archive from the contents of the web_static folder.
+    Returns the archive path if correctly generated, otherwise None.
+    """
+    try:
+        if not os.path.exists("versions"):
+            os.makedirs("versions")
+
+        now = datetime.now()
+        timestamp = now.strftime("%Y%m%d%H%M%S")
+        archive_name = "web_static_{}.tgz".format(timestamp)
+
+        local("tar -cvzf versions/{} web_static".format(archive_name))
+
+        return "versions/{}".format(archive_name)
+
+    except Exception as e:
+        return None
 
 def do_deploy(archive_path):
     if not os.path.exists(archive_path):
