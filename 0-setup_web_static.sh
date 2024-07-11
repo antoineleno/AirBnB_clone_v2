@@ -26,6 +26,9 @@ sudo chown -R ubuntu:ubuntu /data/
 nginx_config="/etc/nginx/sites-available/default"
 sudo sed -i '/server_name _;/a \\n\tlocation /hbnb_static/ {\n\t\talias /data/web_static/current/;\n\t}' $nginx_config
 
-sudo systemctl restart nginx
+if [ "$(pgrep -c nginx)"]; then
+    service nginx start
+else
+    service nginx restart
+fi
 
-exit 0
