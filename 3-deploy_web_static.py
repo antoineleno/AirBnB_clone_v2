@@ -4,12 +4,9 @@
 from fabric.api import env, run, put
 import os
 from datetime import datetime
-from fabric.api import env, local, put, run, runs_once
-
 
 env.hosts = ['100.25.143.96', '54.174.104.61']
 
-@runs_once
 def do_pack():
     """
     Generates a .tgz archive from the contents of the web_static folder.
@@ -28,18 +25,20 @@ def do_pack():
         return "versions/{}".format(archive_name)
 
     except Exception as e:
+        print("Packaging failed:", e)
         return None
 
 def do_deploy(archive_path):
-    """do deploy function: Function that take the content in archive and deply it
+    """Deploy function: Uploads and deploys an archive to web servers
 
     Args:
         archive_path (string): Path of the archive file
 
     Returns:
-        False if an exception occured
+        False if deployment fails
     """
     if not os.path.exists(archive_path):
+        print(f"Archive {archive_path} not found.")
         return False
 
     try:
@@ -74,9 +73,8 @@ def do_deploy(archive_path):
 
 def deploy():
     """Full deployment"""
-
-    archive_path = do_pack();
-    if (archive_path):
-        deploy(archive_path)
+    archive_path = do_pack()
+    if archive_path:
+        return do_deploy(archive_path)
     else:
         return False
