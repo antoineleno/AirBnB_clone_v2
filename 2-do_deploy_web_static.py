@@ -9,7 +9,6 @@ from fabric.api import env, local, put, run, runs_once
 env.hosts = ['100.25.143.96', '54.174.104.61']
 
 
-
 def do_pack():
     """
     Generates a .tgz archive from the contents of the web_static folder.
