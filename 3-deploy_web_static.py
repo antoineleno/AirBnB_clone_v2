@@ -1,11 +1,12 @@
 #!/usr/bin/python3
 """ 3-do_deploy_web_static module"""
 
-from fabric.api import env, run, put
+from fabric.api import env, run, put, local
 import os
 from datetime import datetime
 
 env.hosts = ['100.25.143.96', '54.174.104.61']
+
 
 def do_pack():
     """
@@ -27,6 +28,7 @@ def do_pack():
     except Exception as e:
         print("Packaging failed:", e)
         return None
+
 
 def do_deploy(archive_path):
     """Deploy function: Uploads and deploys an archive to web servers
@@ -70,6 +72,7 @@ def do_deploy(archive_path):
     except Exception as e:
         print("Deployment failed:", e)
         return False
+
 
 def deploy():
     """Full deployment"""
