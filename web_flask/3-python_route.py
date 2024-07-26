@@ -1,6 +1,6 @@
 #!/usr/bin/python3
-"""2-c_router module"""
-from flask import Flask
+"""3 - python_route module"""
+from flask import Flask, request
 
 
 app = Flask("__name__")
@@ -27,6 +27,14 @@ def display_c(text):
     """Method to display c following by the text message"""
     text = text.replace('_', ' ')
     return f"C {text}"
+
+
+@app.route('/python/', defaults={'text': 'is cool'}, strict_slashes=False)
+@app.route('/python/<text>', strict_slashes=False)
+def python_text(text):
+    """Pyton modeule to display python is cool"""
+    text = text.replace('_', ' ')
+    return f"Python {text}"
 
 
 if __name__ == "__main__":
