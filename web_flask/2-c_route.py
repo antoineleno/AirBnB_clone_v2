@@ -22,7 +22,7 @@ def display():
     return "HBNB"
 
 
-@app.route("/c/<text>:")
+@app.route("/c/<text>")
 def display_c(text):
     """Method to display c following by the text message"""
     return f"C {text}"
