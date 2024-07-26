@@ -42,10 +42,12 @@ def display_number(n):
     """Display number if and only if it's an integer"""
     return f"{n} is a number"
 
+
 @app.route('/number_template/<int:n>', strict_slashes=False)
 def display_html_file(n):
     """Return an html file"""
     return render_template('5-number.html', number=n)
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port="5000")
