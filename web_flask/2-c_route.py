@@ -25,6 +25,7 @@ def display():
 @app.route("/c/<text>")
 def display_c(text):
     """Method to display c following by the text message"""
+    text = text.replace('_', ' ')
     return f"C {text}"
 
 if __name__ == "__main__":
