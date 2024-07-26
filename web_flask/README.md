@@ -1,0 +1,12 @@
+# Web framework
+* [What is a Web Framework?](https://intelegain-technologies.medium.com/what-are-web-frameworks-and-why-you-need-them-c4e8806bd0fb)
+* [A Mminimal Application](https://flask.palletsprojects.com/en/2.3.x/quickstart/#a-minimal-application)
+* [Routing](https://flask.palletsprojects.com/en/2.3.x/quickstart/#routing)
+* [Rendering TEmplates](https://flask.palletsprojects.com/en/2.3.x/quickstart/#rendering-templates)
+* [Synopsis](https://jinja.palletsprojects.com/en/2.9.x/templates/#synopsis)
+* [Variables](https://jinja.palletsprojects.com/en/2.9.x/templates/#variables)
+* [comments](https://intranet.alxswe.com/rltoken/ykUFuQSE9KD1M7WGY-4v4w)
+* [Whitespace Control](https://jinja.palletsprojects.com/en/2.9.x/templates/#whitespace-control)
+* [List of Control Structures](https://jinja.palletsprojects.com/en/2.9.x/templates/#list-of-control-structures)
+* [Flask](https://palletsprojects.com/p/flask/)
+* [Jinja](https://jinja.palletsprojects.com/en/2.9.x/templates/)
