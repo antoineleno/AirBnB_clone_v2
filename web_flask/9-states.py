@@ -7,18 +7,28 @@ from models.state import State
 app = Flask(__name__)
 
 
-@app.route("/cities_by_states", strict_slashes=False)
-def display_cities_by_state():
-    """Display all the states from storage"""
-    states = storage.all(State)
-    return render_template("9-states.html", states=states)
+@app.route("/states", strict_slashes=False)
+def states():
+    """Displays an html file
+    """
+    states = storage.all("State")
+    return render_template("9-states.html", state=states)
+
+
+@app.route("/states/<id>", strict_slashes=False)
+def states_by_id(id):
+    """Display an html file"""
+    for state in storage.all("State").values():
+        if state.id == id:
+            return render_template("9-states.html", state=state)
+    return render_template("9-states.html")
 
 
 @app.teardown_appcontext
-def teardown(exception):
-    """Reload each time the content of storage"""
+def teardown(exc):
+    """Remove the current SQLAlchemy session."""
     storage.close()
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    app.run(host="0.0.0.0")
