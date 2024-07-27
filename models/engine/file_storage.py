@@ -73,3 +73,7 @@ class FileStorage:
         key_to_delete = obj.__class__.__name__ + '.' + obj.id
         if key_to_delete in self.__class__.__objects.keys():
             del self.__class__.__objects[key_to_delete]
+
+    def close(self):
+        """Method to deserialize json file to python objects"""
+        self.reload()
