@@ -49,5 +49,6 @@ def display_html_n_env(n):
     """Display an html file if n is old or even"""
     return render_template("6-number_odd_or_even.html", n=n)
 
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
