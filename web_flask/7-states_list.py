@@ -13,6 +13,7 @@ def display_states():
     states = storage.all(State)
     return render_template("7-states_list.html", states=states)
 
+
 @app.teardown_appcontext
 def teardown(exception):
     """Reload each time the content of storage"""
